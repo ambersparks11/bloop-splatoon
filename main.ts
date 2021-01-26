@@ -40,6 +40,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, mySprite, 50, 50)
+    statusbar2.value += 2
+    statusbar.value += -1
 })
 controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
     pause(1000)
@@ -61,6 +63,8 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, mySprite, 50, 50)
+    statusbar2.value += 5
+    statusbar.value += -5
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tilePath5, function (sprite, location) {
     for (let value of tiles.getTilesByType(assets.tile`transparency16`)) {
@@ -68,6 +72,8 @@ scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tilePath5, function (s
     }
 })
 let projectile: Sprite = null
+let statusbar2: StatusBarSprite = null
+let statusbar: StatusBarSprite = null
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -90,4 +96,10 @@ mySprite = sprites.create(img`
 controller.moveSprite(mySprite)
 scene.setBackgroundColor(10)
 tiles.setTilemap(tilemap`level1`)
-let statusbar = statusbars.create(20, 4, StatusBarKind.ink)
+statusbar = statusbars.create(20, 4, StatusBarKind.ink)
+statusbar.attachToSprite(mySprite)
+statusbar.setColor(9, 1)
+statusbar.setLabel("ink", 1)
+statusbar2 = statusbars.create(20, 4, StatusBarKind.Magic)
+statusbar2.attachToSprite(mySprite, 6, 0)
+statusbar2.setLabel("special", 1)
